@@ -1,0 +1,46 @@
+.container {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--background);
+}
+
+.count {
+  font-size: 6rem;
+  line-height: 1;
+  font-weight: bold;
+  color: var(--primary);
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .count {
+    font-size: 8rem;
+  }
+}
+
+.progressContainer {
+  width: 16rem;
+  height: 2px;
+  background-color: color-mix(in srgb, var(--primary) 20%, transparent);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progressBar {
+  height: 100%;
+  background-color: var(--primary);
+  border-radius: 9999px;
+}
+
+.text {
+  margin-top: 1rem;
+  color: var(--primary);
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+} 

@@ -1,0 +1,35 @@
+Options +FollowSymLinks
+RewriteEngine On
+RewriteBase /experimentation/
+
+# Allow direct access to files
+<FilesMatch "\.(js|css|json|jpg|jpeg|png|gif|php|html)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+
+# Handle project routes
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^projects/project\.html$ projects/project.html [L,QSA]
+
+# Handle PHP files
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^data/get-project\.php$ data/get-project.php [L,QSA]
+
+# Handle 404 errors
+ErrorDocument 404 /experimentation/404.html
+
+# Handle Next.js development server
+RewriteCond %{REQUEST_URI} !^/_next
+RewriteCond %{REQUEST_URI} !^/static
+RewriteCond %{REQUEST_URI} !^/api
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ http://localhost:8888/experimentation/$1 [P,L]
+
+# Enable CORS
+Header set Access-Control-Allow-Origin "*"
+Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+Header set Access-Control-Allow-Headers "Content-Type, Authorization" 
